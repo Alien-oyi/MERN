@@ -7,12 +7,14 @@ import {
   Card,
   Row
 } from 'react-bootstrap';
-import { useMutation, useQuery } from '@apollo/client';
-import { SAVE_BOOK } from '../utils/mutation';
+import { useMutation } from '@apollo/client';
+import { SAVE_BOOK } from '../utils/mutations';
 
 import Auth from '../utils/auth';
 import { saveBook, searchGoogleBooks } from '../utils/API';
 import { saveBookIds, getSavedBookIds } from '../utils/localStorage';
+// import reducers
+
 
 const SearchBooks = () => {
   // create state for holding returned google api data
@@ -62,7 +64,7 @@ const SearchBooks = () => {
       console.error(err);
     }
   };
-
+  // 
   // create function to handle saving a book to our database
   const handleSaveBook = async (bookId) => {
     // find the book in `searchedBooks` state by the matching id
@@ -125,8 +127,8 @@ const SearchBooks = () => {
         <Row>
           {searchedBooks.map((book) => {
             return (
-              <Col md="4">
-                <Card key={book.bookId} border='dark'>
+              <Col key={book.bookId} md="4">
+                <Card  border='dark'>
                   {book.image ? (
                     <Card.Img src={book.image} alt={`The cover for ${book.title}`} variant='top' />
                   ) : null}
