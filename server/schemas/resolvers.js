@@ -11,20 +11,21 @@ module.exports = {
     }
   },
   Mutation: {
-    async signup (parent, args, context, info) {
-      const user = await User.create(args);
+  addUser: async (parent, args, context, info) => {
+    const user = await User.create(args);
 
-      if (!user) {
-        throw new Error('Something is wrong!');
-      }
+    if (!user) {
+      throw new Error('Something is wrong!');
+    }
 
-      const token = signToken(user);
+    const token = signToken(user);
 
-      return {
-        token,
-        user,
-      };
-    },
+    return {
+      token,
+      user,
+    };
+  },
+    
     
     async login(parent, args, context, info){
       const user = await User.findOne({ email: args.email});
